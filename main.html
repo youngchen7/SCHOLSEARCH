@@ -1,0 +1,430 @@
+<!DOCTYPE HTML>
+<html class = "no-js" lang = "en">
+	<head>
+	  <meta charset="utf-8">
+	  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	  <title>SCHOLSEARCH</title>
+
+	  <!-- If you are using CSS version, only link these 2 files, you may add app.css to use for your overrides if you like. -->
+	  <link rel="stylesheet" href="css/normalize.css">
+	  <link rel="stylesheet" href="css/foundation.min.css">
+	  <link href="css/main.css" rel="stylesheet" type="text/css">
+
+	</head>
+
+	<body>
+		<div class="row">
+    <div class="large-3 columns">
+      <h1><img src="img/logo_medium.png" /></h1>
+    </div>
+    <div class="large-9 columns">
+      <ul class="right button-group">
+      <li><a href="home.html" class="button">HOME</a></li>
+      <li><a href="scholarships.html" class="button">SCHOLARSHIPS</a></li>
+      <li><a href="profile.html" class="button">PROFILE</a></li>
+      <li><a href="login.html" class="button">LOG IN</a></li>
+      <li><a href="signup.html" class="button orange" >SIGN UP </a></li>
+      </ul>
+     </div>
+   </div>
+  
+<!-- End Header and Nav -->
+ 
+<!-- First Band (Slider) -->
+ <div class="row">
+  <div class="twelve columns">
+      <ul id="slider" class="example-orbit" data-orbit>
+      <li>
+        <img src="img/article_1.png" />
+        <div class="orbit-caption">
+          <a href="http://timesofsandiego.com/sports/2014/11/14/san-diego-state-announces-athletic-scholarship-fund-named-former-football-coach/">Scholarship News</a>
+        </div>
+      </li>
+      <li>
+        <img src="img/article_2.png" alt="slide 2" />
+        <div class="orbit-caption">
+          <a href="https://bigfuture.collegeboard.org/pay-for-college/college-costs/college-costs-faqs">How much will College really cost?</a>
+        </div>
+      </li>
+      <li>
+        <img src="img/article_3.png" alt="slide 3" />
+        <div class="orbit-caption">
+          How to Get Started.
+        </div>
+      </li>
+    </ul>
+    </div>
+</div>
+  
+<!-- Three-up Content Blocks -->
+ 
+  <div class="row">
+    <div class="large-6 columns">
+      <img src="img/eat_small.png" onclick="sampleData()" />
+      <h4>Enter the foods you ate today.</h4>
+       
+      <script >
+	  
+		
+        var id_num = 1;
+        function addInput() {
+          var container = document.createElement("div");;
+          container.innerHTML = "<input type='text' placeholder='Food' id='food_".concat(id_num.toString()).concat( "' value='' />");
+          document.getElementById('text').appendChild(container);
+          id_num++;
+
+          if(id_num>20){
+            document.getElementById('add').innerHTML = " <a onClick='addInput()'' class='button normal alert radius secondary left'>YOU'RE GOING TO CRASH THIS WEBSITE</a>"
+          } else if(id_num>15){
+            document.getElementById('add').innerHTML = " <a onClick='addInput()'' class='button normal alert radius secondary left'>YOU ARE DEAD TO ME</a>"
+          } else if(id_num>10){
+            document.getElementById('add').innerHTML = " <a onClick='addInput()'' class='button normal alert radius secondary left'>DUDE STOP EATING!</a>"
+          } else if (id_num>5){
+            document.getElementById('add').innerHTML = " <a onClick='addInput()''  class='button normal alert radius secondary left'>STILL ADD MORE?</a>"
+          } else if (id_num>3){
+            document.getElementById('add').innerHTML = " <a onClick='addInput()''  class='button normal alert radius secondary left'>ADD EVEN MORE!</a>"
+          }
+        }
+		
+var debug = false;		
+var foodArray = [];
+var dateArray = [];
+var energyArray = [];
+var healthArray = [];
+var moodArray = [];
+
+
+var addDate = function(date) {
+    if(dateArray.indexOf(date) === -1){
+	  dateArray.push(date);
+	
+      var array = new Array(foodArray.length);
+      if(foodArray.length == 0){
+    	  array[0] = 0;
+      }
+      else{
+          for (var i = 0; i < foodArray.length; i++) {
+    	      energyArray[i].push(0);
+			  healthArray[i].push(0);
+			  moodArray[i].push(0);
+          }
+      }
+
+	  }
+	};
+	 
+
+
+var addFood = function(food) {
+    if (foodArray.indexOf(food) === -1) {
+        foodArray.push(food);
+        var array = new Array(dateArray.length);
+		 var array1 = new Array(dateArray.length);
+		 var array2 = new Array(dateArray.length);
+        if(dateArray.length == 0){
+    		array[0] = 0;
+			array1[0] = 0;
+			array2[0] = 0;
+     	}
+    	else{
+        	for (var i = 0; i < array.length; i++) {
+    	    	array[i] = 0;
+				array1[i] = 0;
+				array2[i] = 0;
+        }
+    }
+    energyArray.push(array);
+    healthArray.push(array1);
+    moodArray.push(array2);
+    }
+};
+
+var addEnergy = function(erating, food, date) {
+	var x = foodArray.indexOf(food);
+	var y = dateArray.indexOf(date);
+	energyArray[x][y] = erating;
+
+};
+
+
+var addHealth = function(hrating, food, date) {
+	var x = foodArray.indexOf(food);
+	var y = dateArray.indexOf(date);
+	healthArray[x][y] = hrating;
+};
+
+
+var addMood = function(mrating, food, date) {
+	var x = foodArray.indexOf(food);
+	var y = dateArray.indexOf(date);
+	moodArray[x][y] = mrating;
+
+	};
+
+
+var getRating = function(food, date, category){
+	var x = foodArray.indexOf(food);
+	var y = dateArray.indexOf(date);
+	if (category == "energy") {
+		document.write(energyArray[x,y]);
+	} else if (category == "health") {
+		document.write(healthArray[x,y]);
+	} else if (category == "mood") {
+		document.write(moodArray[x,y]);
+	}
+};        
+
+function show2DArray(array){
+	var toText = "Array: \n";
+	for(var row = 0; row < array.length; row++){
+		for(var col = 0; col<array[row].length; col++){
+			toText+=array[row][col] + "\t";
+		}
+		toText+= "\n";
+	}
+	alert(toText);
+	
+}
+		function sampleData(){
+			alert("populating demo data");
+			var sampleFood = ["Sushi", 
+							  "Sashimi", 
+							  "Rice", 
+							  "Cake", 
+							  "Soda", 
+							  "Sandwich", 
+							  "Chips", 
+							  "Cookies"];
+			var sampleDates = ["1/1/2014", "1/2/2014", "1/3/2014", "1/4/2014", "1/5/2014", "1/6/2014", "1/7/2014"];
+			var sampleEnergy = [ [ 5, 0, 3, 0, 0, 0, 0],
+								 [ 0, 6, 0, 0, 0, 0, 0],
+								 [ 5, 6, 0, 0, 0, 0, 4],
+								 [ 0, 0, 3, 6, 0, 7, 4],
+								 [ 0, 0, 0, 6, 2, 7, 4],
+								 [ 0, 0, 0, 0, 2, 0, 0],
+								 [ 0, 0, 3, 0, 2, 7, 0],
+								 [ 0, 0, 0, 6, 0, 7, 0] ];
+
+			var sampleHealth = [ [ 4, 0, 5, 0, 0, 0, 0],
+								 [ 0, 4, 0, 0, 0, 0, 0],
+								 [ 4, 4, 0, 0, 0, 0, 3],
+								 [ 0, 0, 5, 2, 0, 1, 3],
+								 [ 0, 0, 0, 2, 3, 1, 3],
+								 [ 0, 0, 0, 0, 3, 0, 0],
+								 [ 0, 0, 5, 0, 3, 1, 0],
+								 [ 0, 0, 0, 2, 0, 1, 0] ];
+
+		    var sampleMood =   [ [ 7, 0, 4, 0, 0, 0, 0],
+								 [ 0, 7, 0, 0, 0, 0, 0],
+								 [ 7, 7, 0, 0, 0, 0, 5],
+								 [ 0, 0, 4, 1, 0, 5, 5],
+								 [ 0, 0, 0, 1, 6, 5, 5],
+								 [ 0, 0, 0, 0, 6, 0, 0],
+								 [ 0, 0, 4, 0, 6, 5, 0],
+								 [ 0, 0, 0, 1, 0, 5, 0] ];
+			$.jStorage.set("f_data", sampleFood);
+			$.jStorage.set("d_data", sampleDates);
+			$.jStorage.set("e_data", sampleEnergy);
+			$.jStorage.set("h_data", sampleHealth);
+			$.jStorage.set("m_data", sampleMood);
+			alert("demo data populated");
+		}
+
+		function importData(){
+			if(debug)alert("Importing Data!");
+			foodArray=$.jStorage.get("f_data",[]);
+			dateArray=$.jStorage.get("d_data",[]);
+			energyArray=$.jStorage.get("e_data",[]);
+			healthArray=$.jStorage.get("h_data",[]);
+			moodArray=$.jStorage.get("m_data",[]);
+			if(debug)alert("Imported Data!");
+
+			
+		}
+		
+		function exportData(){
+			if(debug)alert("Exporting Data!");
+			$.jStorage.set("f_data", foodArray);
+			$.jStorage.set("d_data", dateArray);
+			$.jStorage.set("e_data", energyArray);
+			$.jStorage.set("h_data", healthArray);
+			$.jStorage.set("m_data", moodArray);
+			if(debug)alert("Exported Data!");
+		}
+		
+
+		
+	
+	 	function getinfo(){
+			importData();
+			//var testArray = [[1, 2, 3], [4, 5, 6], [7, 8, 9]];
+			//show2DArray(testArray);
+			//show2DArray(energyArray);
+		   //show2DArray(healthArray);
+		   //show2DArray(moodArray);
+		   //addMood(7,"pickles","1/2/2013");
+		   //alert("Added mood for 1/2/2013 and pickles rating 7");
+		   //show2DArray(energyArray);
+		   //show2DArray(healthArray);
+		   //show2DArray(moodArray);
+		  	
+	  	  var d= new Date();
+		  var date= d.getMonth()+1+ "/" + d.getDate() + "/" + d.getFullYear();
+		  
+		  addDate(date);
+		
+		  var food;
+		  
+		  var energyRating= document.getElementById("energy").value;
+		  var healthRating= document.getElementById("health").value;
+		  var moodRating= document.getElementById("mood").value;
+		  
+		  for(var a=0; a<id_num; a++){
+			  
+	       food = document.getElementById("food_".concat(a.toString())).value;
+	       if(food.length>1){
+		      addFood(food);
+		      addEnergy(energyRating, food, date);
+		      addHealth(healthRating, food, date);
+		      addMood(moodRating, food, date);
+		   
+		   if(debug){
+		      show2DArray(energyArray);
+		      show2DArray(healthArray);
+		      show2DArray(moodArray);
+		      alert("added: " + food + "\nratings: " +energyRating + " " + healthRating + " " + moodRating);
+		   }
+		   }
+		  }
+		  if(debug){
+	 	     show2DArray(foodArray);
+		     show2DArray(dateArray);
+		     show2DArray(energyArray);
+		     show2DArray(healthArray);
+		     show2DArray(moodArray);
+		  
+		     alert(energyArray.length + " foods x " + energyArray[0].length + " dates");
+		  }
+		  exportData();
+			alert("Submission complete!");	  
+		}
+      </script>
+      <div id="text">
+        <input type="text" id="food_0" placeholder="Food" />
+      </div>
+
+      <form name="form">
+        <div id='add'>
+          <a onClick="addInput()" class="button normal alert radius secondary left">Add more!</a>
+        </div>
+      </form>
+    </div>
+    
+    <div class="large-6 columns">
+      <img src="img/rate_small.png"/>
+      <h4>Rate your day</h4>
+      <div class="row">
+        <div class="large-12 columns">
+          <label>Energy</label>
+          <select id="energy" name="energy">
+            <option value="7">Amazing!</option>
+            <option value="6">Great</option>
+            <option value="5">Good</option>
+            <option value="4">Alright</option>
+            <option value="3">Bad</option>
+            <option value="2">Awful</option>
+            <option value="1">Horrible</option>
+
+          </select>
+        </div>
+      </div>
+      <div class="row">
+        <div class="large-12 columns">
+          <label>Health</label>
+          <select id="health" name="health">
+            <option value="7">Amazing!</option>
+            <option value="6">Great</option>
+            <option value="5">Good</option>
+            <option value="4">Alright</option>
+            <option value="3">Bad</option>
+            <option value="2">Awful</option>
+            <option value="1">Horrible</option>
+
+          </select>
+        </div>
+      </div>
+      <div class="row">
+        <div class="large-12 columns">
+          <label>Mood</label>
+          <select id="mood" name="mood">
+            <option value="7">Amazing!</option>
+            <option value="6">Great</option>
+            <option value="5">Good</option>
+            <option value="4">Alright</option>
+            <option value="3">Bad</option>
+            <option value="2">Awful</option>
+            <option value="1">Horrible</option>
+
+          </select>
+        </div>
+      </div>
+      <div class="row">
+        <div class="large-12 columns">
+          <a href="#" onclick="getinfo()" class="button large radius right">Submit!</a>
+        </div>
+      </div>
+    </div>
+  </div>
+    
+<!-- Call to Action Panel -->
+<div class="row">
+    <div class="large-12 columns">
+    
+      <div class="panel">
+        <h4>Get in touch!</h4>
+            
+        <div class="row">
+          <div class="large-9 columns">
+            <p>We'd love to hear from you, you attractive person you.</p>
+          </div>
+          <div class="large-3 columns">
+            <a href="#" class="radius button right">Contact Us</a>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+ 
+  <!-- Footer -->
+  
+  <footer class="row">
+    <div class="large-12 columns">
+      <hr />
+      <div class="row">
+        <div class="large-6 columns">
+          <p>© Copyright no one at all. Go to town.</p>
+        </div>
+        <div class="large-6 columns">
+          <ul class="inline-list right">
+            <li><a href="home.html">Home</a></li>
+            <li><a href="main.html">Record</a></li>
+            <li><a href="analyze.html">Analyze</a></li>
+            <li><a href="login.html">Login/Register</a></li>
+          </ul>
+        </div>
+      </div>
+    </div> 
+  </footer>
+ <script src="js/vendor/jquery.js"></script>
+  <script src="js/foundation.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/json2/20110223/json2.js"></script>
+<script src="https://raw.github.com/andris9/jStorage/master/jstorage.js"></script>
+<script> /* $.jStorage is now available */ </script>
+  
+  <script>
+    $(document).foundation();
+  </script>
+	</body>
+
+</html>

@@ -1,0 +1,50 @@
+<html>
+<body>
+  <p> JStorage test </p>
+  <form id="data">
+   <input type="text" placeholder="key" id="key">     
+   <input type="text" placeholder="value" id="value"> 
+
+ </form>
+ <script src="//cdnjs.cloudflare.com/ajax/libs/json2/20110223/json2.js"></script>
+ <script src="https://raw.github.com/andris9/jStorage/master/jstorage.js"></script>
+ <script src="js/jstorage.min.js"></script>
+ <script src="js/prototype.js"></script>
+ <script> /* $.jStorage is now available */ </script>
+ <script>         
+  function echo(){
+    alert(document.getElementById("key").value);
+  };
+
+  function save(){
+    alert("saving...");
+    $.jStorage.set(document.getElementById("key").value, document.getElementById("value").value);
+    alert("saved");
+  };
+
+  function get(){
+    alert("retrieving...");
+    alert($.jStorage.get(document.getElementById("key").value));
+    alert("retrieved");
+
+  };
+
+  function flush(){
+    alert("flushing...");
+    $.jStorage.flush();
+    alert("flush");
+  };
+
+  </script>
+<input type="button" onclick="echo()" value="echo"/>
+<input type="button" onclick="save()" value="save"/>
+<input type="button" onclick="get()"  value="get"/>
+<input type="button" onclick="flush()"value="flush"/>
+
+
+
+
+
+
+</body>
+</html>
